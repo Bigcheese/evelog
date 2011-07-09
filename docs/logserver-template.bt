@@ -1,0 +1,133 @@
+//===- docs/logserver-template.bt - logserver file format -----------------===//
+//
+// evelog
+//
+// This file is distributed under the Simplified BSD License. See LICENSE.TXT
+// for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This is a 010 Editor template which describes the logserver file format.
+//
+//===----------------------------------------------------------------------===//
+
+typedef struct {
+    char type;
+    if (type == 0x06)
+        char len;
+    else if (type == 0x0C)
+        uint32 len;
+
+    if (len > 0)
+        char str[len];
+} pstring <read=pstringRead>;
+
+string pstringRead(pstring &str) {
+    if (str.len == 0)
+        return "";
+    return str.str;
+}
+
+typedef struct {
+    char type;
+    OLETIME time;
+} time;
+
+typedef struct {
+    char type;
+    switch (type) {
+        case 0x02: unsigned char value; break;
+        case 0x03: uint16 value; break;
+        case 0x04: uint32 value; break;
+    }
+} number;
+
+typedef struct {
+    int64 facility_hash;
+    int64 object_hash;
+    char facility[0x21];
+    char object[0x21];
+    char unk1[0x0e];
+} channel;
+
+typedef struct {
+    uint32 unk0;
+    pstring computer;
+    pstring process_name;
+    number process_id;
+    number thread_id;
+    pstring module;
+    char unk1[8];
+} process_module;
+
+typedef struct {
+    pstring name;
+    pstring description;
+    time created;
+    time modified;
+    number count;
+    process_module list[count.value] <optimize=false>;
+} process_module_list;
+
+typedef struct {
+    pstring name;
+    pstring description;
+    time created;
+    time modified;
+    char unk0[8];
+    pstring file_mapping_name;
+    number flush_rate;
+    number capacity;
+    char unk1[8];
+    number unk2;
+    number channel_count;
+    channel channels[channel_count.value];
+    process_module_list pml[channel_count.value] <optimize=false>;
+} device;
+
+typedef struct {
+    uint16 channel_id; // This the index + 1 of the channel in the channel table.
+    uint32 thread_id;
+    FILETIME timestamp;
+    char unk3[4];
+    uint32 len;
+    char data[len];
+    uint32 process_id;
+    char unk5[4];
+} storage_entry;
+
+typedef struct {
+    pstring name;
+    pstring description;
+    time created;
+    time modified;
+    char unk0[8];
+    number inital_capacity;
+    number incremental_capacity;
+    char unk3;
+    char unk4;
+    char unk5[8];
+    number unk6;
+    char unk7;
+    number unk8;
+    char unk9;
+    number entry_count;
+    number unk11;
+    storage_entry entries[entry_count.value] <optimize=false>;
+} storage;
+
+typedef struct {
+    uint16 huh;
+    pstring name;
+    pstring description;
+    time created;
+    time modified;
+    pstring file_path;
+    number device_count;
+    device devices[device_count.value] <optimize=false>;
+    uint16 some_weirdness;
+    number storage_count;
+    storage storages[storage_count.value] <optimize=false>;
+} workspace;
+
+workspace w;
