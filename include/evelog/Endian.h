@@ -14,7 +14,7 @@
 #ifndef EVELOG_ENDIAN_H
 #define EVELOG_ENDIAN_H
 
-#include <iostream>
+#include <istream>
 
 #include "evelog/SwapByteOrder.h"
 
@@ -144,6 +144,16 @@ public:
   value_type Value;
 };
 
+template<typename value_type,
+         endianness endian,
+         alignment  align>
+std::istream &operator >>(std::istream &i,
+                          packed_endian_specific_integral
+                            <value_type, endian, align> &val) {
+  i.read(reinterpret_cast<char*>(val.Value), sizeof(val.Value));
+  return i;
+}
+
 } // end namespace detail
 
 typedef detail::packed_endian_specific_integral
@@ -219,15 +229,5 @@ typedef detail::packed_endian_specific_integral
                      <int64_t, big, aligned>    aligned_big64_t;
 
 } // end namespace evelog
-
-template<typename value_type,
-         evelog::endianness endian,
-         evelog::alignment  align>
-std::istream &operator >>(std::istream &i,
-  evelog::detail::packed_endian_specific_integral
-    <value_type, endian, align> &val) {
-  i.read(reinterpret_cast<char*>(val.Value), sizeof(val.Value));
-  return i;
-}
 
 #endif
