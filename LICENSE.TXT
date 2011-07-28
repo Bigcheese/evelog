@@ -24,5 +24,8 @@ OF SUCH DAMAGE.
 ================================================================================
 Copyrights and Licenses for Third Party Software.
 ================================================================================
-evelog contains code from the LLVM project. All such files state this at the
-top. See LLVM_LICENSE.TXT for the license for these files.
+evelog contains code from the following projects/people. All files state the
+licence which they are under at the top.
+
+* LLVM - See LLVM_LICENSE.TXT
+* Boris Schaeling - See BOOST_LICENSE_1_0.txt
