@@ -1,4 +1,4 @@
-//===- LWBReader.cpp - lwb reader -------------------------------*- C++ -*-===//
+//===- LBWReader.cpp - lbw reader -------------------------------*- C++ -*-===//
 //
 // evelog
 //
@@ -7,14 +7,14 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file defines the classes and operators needed to read a lwb file.
+// This file defines the classes and operators needed to read a lbw file.
 //
 //===----------------------------------------------------------------------===//
 
 #include <cstdint>
 #include <iostream>
 
-#include "evelog/LWBReader.h"
+#include "evelog/LBWReader.h"
 #include "evelog/Endian.h"
 
 namespace {

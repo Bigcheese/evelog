@@ -1,4 +1,4 @@
-//===- LWBReader.h - lwb reader ---------------------------------*- C++ -*-===//
+//===- LBWReader.h - lbw reader ---------------------------------*- C++ -*-===//
 //
 // evelog
 //
@@ -7,12 +7,12 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file declares the classes needed to read a lwb file.
+// This file declares the classes needed to read a lbw file.
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef EVELOG_LWBREADER_H
-#define EVELOG_LWBREADER_H
+#ifndef EVELOG_LBWREADER_H
+#define EVELOG_LBWREADER_H
 
 #include <cstdint>
 #include <istream>

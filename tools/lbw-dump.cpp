@@ -1,4 +1,4 @@
-//===- tools/lwb-dump.cpp - lwb dumper --------------------------*- C++ -*-===//
+//===- tools/lbw-dump.cpp - lbw dumper --------------------------*- C++ -*-===//
 //
 // evelog
 //
@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This file implements a very simple lwb storage entry dumper using the evelog
+// This file implements a very simple lbw storage entry dumper using the evelog
 // library.
 //
 //===----------------------------------------------------------------------===//
@@ -16,7 +16,7 @@
 #include <iostream>
 
 #include "evelog/Endian.h"
-#include "evelog/LWBReader.h"
+#include "evelog/LBWReader.h"
 
 void print_help() {
   std::cout << "lwb-dump <input-file>\n";

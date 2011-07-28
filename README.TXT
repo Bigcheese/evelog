@@ -1,7 +1,7 @@
 evelog
 ======
 
-evelog is a C++ library for reading .lwb files output from the EVE Online
+evelog is a C++ library for reading .lbw files output from the EVE Online
 logserver.
 
 See tools/lbw-dump.cpp for an example of using the evelog library.

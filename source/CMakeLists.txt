@@ -1,3 +1,3 @@
 add_library(evelog
-            LWBReader.cpp
+            LBWReader.cpp
             )
